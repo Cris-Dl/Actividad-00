@@ -23,41 +23,72 @@ class Registro:
     def __init__(self):
         self.cuentas = {}
 
-    def crear_cuenta(self, numero_cuenta, nombre, pin, saldo):
-        if numero_cuenta in self.cuentas:
-            raise ValueError("El número de cuenta ya existe")
-        if saldo <= 0:
-            raise ValueError("El saldo no puede ser menor o igual a 0")
+    def crear_cuenta(self):
+
+        while True:
+            try:
+                numero_cuenta = int(input("Ingrese el numero de cuenta: "))
+                if not numero_cuenta:
+                    raise ValueError("No puede dejar el numero de cuenta esto vacío")
+
+                if numero_cuenta <= 0:
+                    raise ValueError("No puede dejar el numero de cuenta en 0")
+
+                if numero_cuenta in self.cuentas:
+                    raise ValueError("El cuenta ya existe en la lista")
+
+            except Exception as e:
+                print(f"Error inesperado: {e}")
+
+            else:
+                break
+
+        while True:
+            try:
+                pin = input("Ingrese el pin de la cuenta: ")
+                if not pin:
+                    raise ValueError("No puede dejar el PIN vacío")
+
+            except ValueError:
+                print("Error: El pin no es valido, intente de nuevo")
+
+            else:
+                break
+
+        while True:
+            try:
+                nombre = input("Ingrese el nombre de la cuenta: ")
+                if not nombre:
+                    raise ValueError("No puede dejar el nombre vacío")
+
+            except Exception as e:
+                print(f"Error inesperado: {e}")
+            else:
+                break
+
+        while True:
+            try:
+                saldo = float(input("Ingrese el saldo de la cuenta Q: "))
+                if saldo <= 0:
+                    raise ValueError("Saldo no puede ser menor o igual a 0")
+
+            except ValueError:
+                print("Error: El valor de saldo no es valido, intente de nuevo")
+
+            except Exception as e:
+                print(f"Error inesperado: {e}")
+
+            else:
+                break
 
         self.cuentas[numero_cuenta] = {
             "pin": pin,
             "info": {
                 "nombre": nombre,
                 "saldo": saldo
+                }
             }
-        }
+        print("Cuenta creada con exito")
 
-    def mostrar_info(self, numero_cuenta, pin_ingresado):
-        if numero_cuenta not in self.cuentas:
-            print("Cuenta no encontrada.")
-            return
-
-        cuenta = self.cuentas[numero_cuenta]
-
-        if cuenta["pin"] == pin_ingresado: # validar si es el pin del numero de cuenta
-            print(f"\nBienvenido {cuenta['info']['nombre']}")
-            print(f"Saldo actual Q: {cuenta['info']['saldo']}")
-        else:
-            print("PIN incorrecto. Acceso denegado.")
-
-# Comprobando si funciona
 registro = Registro()
-registro.crear_cuenta("1234", "Cristhian", "333", 777)
-registro.crear_cuenta("12345", "Diego", "123", 1000)
-registro.crear_cuenta("123456", "Santiago", "777", 750.50)
-
-numero = input("Ingrese número de cuenta: ")
-pin = input("Ingrese su PIN: ")
-
-registro.mostrar_info(numero, pin)
-# Si da así
+registro.crear_cuenta()
