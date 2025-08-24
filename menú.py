@@ -5,9 +5,10 @@ while True:
     print("3.Salir")
     option=input("Seleccione una opción (1-3): ")
 
+    #Opcion=registro()
     match option:
         case "1":
-
+            #opcion.ingresar_cajero()
             while True:
                 print("\n--MENÚ--")
                 print("1.Consultar cuenta")
