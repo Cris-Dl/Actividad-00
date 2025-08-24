@@ -15,10 +15,10 @@ class Cuenta:
         if nuevo_saldo >= 0:
             self._saldo = nuevo_saldo
         else:
-            print("El saldo no puede ser menor a 0")
+            print("El saldo no puede ser menor a Q0")
 
     def mostrar_info(self):
-        return f"\nNúmero de cuenta:{self.numero_cuenta} - Saldo: {self.saldo}"
+        return f"\nNúmero de cuenta: {self.numero_cuenta} - Saldo: Q{self.saldo}"
 
     def sett_pin(self, pin_ingresado):
         return self.__pin == pin_ingresado
@@ -28,16 +28,26 @@ class Cuenta:
         return self.__pin
 
     def cambiar_pin(self):
-        pin_actual = input("Ingrese el pin actual: ")
-        if self.__pin != pin_actual:
-            print(" Pin incorrecto")
-            return
-        nuevo_pin = input("Ingrese el nuevo pin: ")
-        if nuevo_pin == self.__pin:
-            print("El nuevo pin no puede ser igual al anterior.")
-            return
-        self.__pin = nuevo_pin
-        print(f" Se ha cambiado el pin. Nuevo pin guardado {nuevo_pin}.")
+        while True:
+            try:
+                pin_actual = input("Ingrese el PIN actual: ").strip()
+                if not pin_actual:
+                    raise ValueError("El PIN actual no puede estar vacío")
+                if pin_actual != self.__pin:
+                    raise ValueError("PIN incorrecto")
+
+                nuevo_pin = input("Ingrese el nuevo PIN: ").strip()
+                if not nuevo_pin:
+                    raise ValueError("El nuevo PIN no puede estar vacío")
+                if nuevo_pin == self.__pin:
+                    raise ValueError("El nuevo PIN no puede ser igual al anterior")
+
+                self.__pin = nuevo_pin
+                print(f"Se ha cambiado el PIN. Nuevo PIN guardado: {nuevo_pin}")
+                break
+
+            except ValueError as e:
+                print(f"Error: {e}. Intente de nuevo.")
 
     def mostrar_historial(self):
         if not self._historial_retiros:
@@ -84,7 +94,7 @@ class Registro:
                 if not nombre.strip():
                     raise ValueError("No puede dejar el nombre vacío")
             except ValueError as e:
-                print(f"Error: {e}\n")
+                print(f"Error: {e}")
             else:
                 break
 
@@ -95,16 +105,16 @@ class Registro:
                     raise ValueError("No puede dejar el saldo vacío")
                 saldo = float(saldo_input)
                 if saldo <= 0:
-                    raise ValueError("El saldo debe ser mayor que 0")
+                    raise ValueError("El saldo debe ser mayor que Q0")
 
             except Exception as e:
-                print(f"Error: {e}\n")
+                print(f"Error: {e}")
 
             else:
                 break
 
         self.diccionario[numero_cuenta] = Cuenta(nombre, numero_cuenta, pin, saldo)
-        print(f"\nCuenta creada con exito\n")
+        print(f"Cuenta creada con exito")
 
     def ingresar_cajero(self):
         try:
@@ -113,7 +123,7 @@ class Registro:
                 raise ValueError("No puede dejar vacío el número de cuenta")
             numero_cuenta = int(numero_cuenta_input)
         except Exception as e:
-            print(f"Error: {e}\n")
+            print(f"Error: {e}")
             return None
 
         cuenta = self.diccionario.get(numero_cuenta)
@@ -126,11 +136,11 @@ class Registro:
             if not pin_cuenta.strip():
                 raise ValueError("No puede dejar vacío el PIN")
         except ValueError as e:
-            print(f"Error: {e}\n")
+            print(f"Error: {e}")
             return None
 
         if cuenta.sett_pin(pin_cuenta):
-            print(f"Bienvenido, {cuenta.nombre}")
+            print(f"\nBienvenido, {cuenta.nombre}.")
             return cuenta
 
         print("Pin incorrecto.")
@@ -138,21 +148,21 @@ class Registro:
 
     def retirar(self, cuenta):
         try:
-            monto_cuenta = input("Ingrese la cantidad a retirar: ")
+            monto_cuenta = input("Ingrese la cantidad a retirar: Q")
             if not monto_cuenta.strip():
                 raise ValueError("No puede dejar vacío el monto a retirar")
 
-            monto = float(monto_cuenta)  # Convierte a número
+            monto = float(monto_cuenta)
             if monto <= 0:
                 print("El monto debe ser positivo.")
                 return
             if monto > cuenta.saldo:
-                print("Fondos insuficientes.")
+                print("Fondos insuficientes")
                 return
 
             cuenta.saldo = cuenta.saldo - monto
             cuenta._historial_retiros.append(monto)
-            print(f"El nuevo saldo es de {cuenta.saldo}")
+            print(f"El nuevo saldo es de Q{cuenta.saldo}")
             print()
         except Exception as e:
             print(f"Error inesperado: {e}")
