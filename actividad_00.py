@@ -40,3 +40,14 @@ class Registro:
         print(" Pin incorrecto.")
         return None
 
+    def retirar(self, cuenta):
+        monto = int(input("Ingrese la cantidad a retirar: "))
+        if monto <= 0:
+            print(" El monto debe ser positivo.")
+            return
+        if monto > cuenta.saldo:
+            print(" Fondos insuficientes.")
+            return
+        cuenta.saldo = cuenta.saldo - monto
+        cuenta._historial_retiros.append(monto)
+        print(f"El nuevo saldo es de {cuenta.saldo}")
