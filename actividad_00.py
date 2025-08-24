@@ -30,3 +30,13 @@ class Registro:
         saldo = int(input("Ingrese la cantidad de dinero que va a tener su cuenta: "))
         self.diccionario[numero_cuenta] = Cuenta(nombre,numero_cuenta, pin, saldo)
 
+    def ingresar_cajero(self):
+        numero_cuenta = input("Ingrese el número de cuenta: ")
+        pin_cuenta = input("Ingrese el pin de la cuenta: ")
+        cuenta = self.diccionario[numero_cuenta]
+        if cuenta.sett_pin(pin_cuenta):
+            print(f"Bienvenido, {cuenta.nombre}")
+            return cuenta
+        print(" Pin incorrecto.")
+        return None
+
