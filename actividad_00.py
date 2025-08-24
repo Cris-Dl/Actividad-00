@@ -39,6 +39,14 @@ class Cuenta:
         self.__pin = nuevo_pin
         print(f" Se ha cambiado el pin. Nuevo pin guardado {nuevo_pin}.")
 
+    def mostrar_historial(self):
+        if not self._historial_retiros:
+            print("No hay retiros registrados.")
+        else:
+            print("Historial de retiros:")
+            for retiro in self._historial_retiros:
+                print(f"- Retiro de {retiro}")
+
 class Registro:
     def __init__(self):
         self.diccionario = {}
