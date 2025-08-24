@@ -87,17 +87,19 @@ class Registro:
     def consultar_cuenta(self, cuenta):
         print(cuenta.mostrar_info())
 
+
+registro=Registro()
 while True:
     print("\n--BIENVENIDO--")
     print("1.Iniciar sesión")
     print("2.Crear cuenta")
-    print("3.Salir")
+    print("3.Salir\n")
     option=input("Seleccione una opción (1-3): ")
 
-    #Opcion=registro()
+
     match option:
         case "1":
-            #opcion.ingresar_cajero()
+            cuenta = registro.ingresar_cajero()
             while True:
                 print("\n--MENÚ--")
                 print("1.Consultar cuenta")
@@ -122,7 +124,7 @@ while True:
                     case _:
                         print("Ocurrió un error inesperado")
         case "2":
-            print()
+            registro.crear_cuenta()
         case "3":
             print("Gracias por usar el programa")
             break
