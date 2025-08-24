@@ -12,13 +12,13 @@ class Cuenta:
 
     @saldo.setter
     def saldo(self, nuevo_saldo):
-        if nuevo_saldo > 0:
+        if nuevo_saldo >= 0:
             self._saldo = nuevo_saldo
         else:
-            print("El saldo no puede ser menor o igual a 0")
+            print("El saldo no puede ser menor a 0")
 
     def mostrar_info(self):
-        return f"Número de cuenta:{self.numero_cuenta} - Saldo: {self.saldo}"
+        return f"\nNúmero de cuenta:{self.numero_cuenta} - Saldo: {self.saldo}"
 
     def sett_pin(self, pin_ingresado):
         return self.__pin == pin_ingresado
@@ -137,23 +137,31 @@ class Registro:
         return None
 
     def retirar(self, cuenta):
-        monto = int(input("Ingrese la cantidad a retirar: "))
-        if monto <= 0:
-            print(" El monto debe ser positivo.")
-            return
-        if monto > cuenta.saldo:
-            print(" Fondos insuficientes.")
-            return
-        cuenta.saldo = cuenta.saldo - monto
-        cuenta._historial_retiros.append(monto)
-        print(f"El nuevo saldo es de {cuenta.saldo}")
-        print()
+        try:
+            monto_cuenta = input("Ingrese la cantidad a retirar: ")
+            if not monto_cuenta.strip():
+                raise ValueError("No puede dejar vacío el monto a retirar")
+
+            monto = float(monto_cuenta)  # Convierte a número
+            if monto <= 0:
+                print("El monto debe ser positivo.")
+                return
+            if monto > cuenta.saldo:
+                print("Fondos insuficientes.")
+                return
+
+            cuenta.saldo = cuenta.saldo - monto
+            cuenta._historial_retiros.append(monto)
+            print(f"El nuevo saldo es de {cuenta.saldo}")
+            print()
+        except Exception as e:
+            print(f"Error inesperado: {e}")
 
     def consultar_cuenta(self, cuenta):
         print(cuenta.mostrar_info())
 
-
 registro=Registro()
+
 while True:
     print("\n--BIENVENIDO--")
     print("1.Iniciar sesión")
