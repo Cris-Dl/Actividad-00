@@ -51,3 +51,4 @@ class Registro:
         cuenta.saldo = cuenta.saldo - monto
         cuenta._historial_retiros.append(monto)
         print(f"El nuevo saldo es de {cuenta.saldo}")
+        print()
