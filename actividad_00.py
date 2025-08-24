@@ -52,3 +52,6 @@ class Registro:
         cuenta._historial_retiros.append(monto)
         print(f"El nuevo saldo es de {cuenta.saldo}")
         print()
+
+    def consultar_cuenta(self, cuenta):
+        print(cuenta.mostrar_info())
