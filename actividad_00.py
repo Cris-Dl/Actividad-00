@@ -4,6 +4,7 @@ class Cuenta:
         self.numero_cuenta = numero_cuenta
         self.__pin = pin
         self._saldo = saldo
+        self._historial_retiros = []
 
     @property
     def saldo(self):
@@ -18,6 +19,13 @@ class Cuenta:
 
     def mostrar_info(self):
         return f"Número de cuenta:{self.numero_cuenta} - Saldo: {self.saldo}"
+
+    def sett_pin(self, pin_ingresado):
+        return self.__pin == pin_ingresado
+
+    @property
+    def pin(self):
+        return self.__pin
 
 class Registro:
     def __init__(self):
