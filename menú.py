@@ -52,8 +52,8 @@ class Registro:
         self.diccionario = {}
 
     def crear_cuenta(self):
-        nombre = input("Ingrese su nombre: ")
         numero_cuenta = input("Ingrese el número de cuenta que quiera tener: ")
+        nombre = input("Ingrese su nombre: ")
         pin = input("Escriba el pin de su cuenta: ")
         saldo = int(input("Ingrese la cantidad de dinero que va a tener su cuenta: "))
         self.diccionario[numero_cuenta] = Cuenta(nombre,numero_cuenta, pin, saldo)
@@ -111,13 +111,13 @@ while True:
 
                 match option2:
                     case "1":
-                        print()
+                        registro.consultar_cuenta(cuenta)
                     case "2":
-                        print()
+                        registro.retirar(cuenta)
                     case "3":
-                        print()
+                        cuenta.cambiar_pin()
                     case "4":
-                        print()
+                        cuenta.mostrar_historial()
                     case "5":
                         print("Gracias por usar el programa.")
                         break
