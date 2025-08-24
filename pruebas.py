@@ -27,56 +27,50 @@ class Registro:
 
         while True:
             try:
-                numero_cuenta = int(input("Ingrese el numero de cuenta: "))
-                if not numero_cuenta:
-                    raise ValueError("No puede dejar el numero de cuenta esto vacío")
-
+                numero_cuenta_input = input("Ingrese el numero de cuenta: ")
+                if not numero_cuenta_input.strip():
+                    raise ValueError("No puede dejar el número de cuenta vacío")
+                numero_cuenta = int(numero_cuenta_input)
                 if numero_cuenta <= 0:
-                    raise ValueError("No puede dejar el numero de cuenta en 0")
-
+                    raise ValueError("El número de cuenta debe ser mayor que 0")
                 if numero_cuenta in self.cuentas:
-                    raise ValueError("El cuenta ya existe en la lista")
-
-            except Exception as e:
-                print(f"Error inesperado: {e}")
-
+                    raise ValueError("La cuenta ya existe")
+            except ValueError as e:
+                print(f"Error: {e}\n")
             else:
                 break
 
         while True:
             try:
-                pin = input("Ingrese el pin de la cuenta: ")
-                if not pin:
+                pin = input("Ingrese el PIN de la cuenta: ")
+                if not pin.strip():
                     raise ValueError("No puede dejar el PIN vacío")
-
-            except ValueError:
-                print("Error: El pin no es valido, intente de nuevo")
-
+            except ValueError as e:
+                print(f"Error: {e}\n")
             else:
                 break
 
         while True:
             try:
                 nombre = input("Ingrese el nombre de la cuenta: ")
-                if not nombre:
+                if not nombre.strip():
                     raise ValueError("No puede dejar el nombre vacío")
-
-            except Exception as e:
-                print(f"Error inesperado: {e}")
+            except ValueError as e:
+                print(f"Error: {e}\n")
             else:
                 break
 
         while True:
             try:
-                saldo = float(input("Ingrese el saldo de la cuenta Q: "))
+                saldo_input = input("Ingrese el saldo de la cuenta Q: ")
+                if not saldo_input.strip():
+                    raise ValueError("No puede dejar el saldo vacío")
+                saldo = float(saldo_input)
                 if saldo <= 0:
-                    raise ValueError("Saldo no puede ser menor o igual a 0")
-
-            except ValueError:
-                print("Error: El valor de saldo no es valido, intente de nuevo")
+                    raise ValueError("El saldo debe ser mayor que 0")
 
             except Exception as e:
-                print(f"Error inesperado: {e}")
+                print(f"Error: {e}\n")
 
             else:
                 break
@@ -88,7 +82,4 @@ class Registro:
                 "saldo": saldo
                 }
             }
-        print("Cuenta creada con exito")
-
-registro = Registro()
-registro.crear_cuenta()
+        print(f"\nCuenta '{numero_cuenta}' creada con exito\n")
