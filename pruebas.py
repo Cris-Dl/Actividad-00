@@ -32,18 +32,18 @@ class Cuenta:
             try:
                 pin_actual = input("Ingrese el PIN actual: ").strip()
                 if not pin_actual:
-                    raise ValueError("El PIN actual no puede estar vacío\n")
+                    raise ValueError("El PIN actual no puede estar vacío")
                 if pin_actual != self.__pin:
-                    raise ValueError("PIN incorrecto\n")
+                    raise ValueError("PIN incorrecto")
 
                 nuevo_pin = input("Ingrese el nuevo PIN: ").strip()
                 if not nuevo_pin:
-                    raise ValueError("El nuevo PIN no puede estar vacío\n")
+                    raise ValueError("El nuevo PIN no puede estar vacío")
                 if nuevo_pin == self.__pin:
-                    raise ValueError("El nuevo PIN no puede ser igual al anterior\n")
+                    raise ValueError("El nuevo PIN no puede ser igual al anterior")
 
                 self.__pin = nuevo_pin
-                print(f"Se ha cambiado el PIN. Nuevo PIN guardado: {nuevo_pin}\n")
+                print(f"Se ha cambiado el PIN. Nuevo PIN guardado: {nuevo_pin}")
                 break
 
             except ValueError as e:
@@ -53,9 +53,9 @@ class Cuenta:
         if not self._historial_retiros:
             print("No hay retiros registrados.\n")
         else:
-            print("Historial de retiros:")
+            print("\nHistorial de retiros:")
             for retiro in self._historial_retiros:
-                print(f"- Retiro de Q{retiro}\n")
+                print(f"- Retiro de Q{retiro}")
 
 class Registro:
     def __init__(self):
