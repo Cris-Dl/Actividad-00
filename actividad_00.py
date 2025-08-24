@@ -27,6 +27,18 @@ class Cuenta:
     def pin(self):
         return self.__pin
 
+    def cambiar_pin(self):
+        pin_actual = input("Ingrese el pin actual: ")
+        if self.__pin != pin_actual:
+            print(" Pin incorrecto")
+            return
+        nuevo_pin = input("Ingrese el nuevo pin: ")
+        if nuevo_pin == self.__pin:
+            print("El nuevo pin no puede ser igual al anterior.")
+            return
+        self.__pin = nuevo_pin
+        print(f" Se ha cambiado el pin. Nuevo pin guardado {nuevo_pin}.")
+
 class Registro:
     def __init__(self):
         self.diccionario = {}
