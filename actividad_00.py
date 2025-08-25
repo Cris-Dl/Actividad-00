@@ -59,7 +59,9 @@ class Cuenta:
 
 class Registro:
     def __init__(self):
-        self.diccionario = {}
+        self.diccionario = {112233: Cuenta("Manuel", 112233, "1234", 5000),
+            192837: Cuenta("Silvia", 192837, "5678", 7500),
+            987654: Cuenta("Carlos", 987654, "9012", 250)}
 
     def crear_cuenta(self):
 
@@ -215,3 +217,8 @@ while True:
             break
         case _:
             print("Error inesperado, inténtelo de nuevo\n")
+
+#Cuentas quemadas:
+#112233: Cuenta("Manuel", 112233, "1234", 5000),
+#192837: Cuenta("Silvia", 192837, "5678", 7500),
+#987654: Cuenta("Carlos", 987654, "9012", 250)
