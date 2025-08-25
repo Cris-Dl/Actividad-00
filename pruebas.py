@@ -185,29 +185,29 @@ while True:
             cuenta = registro.ingresar_cajero()
             if cuenta is None:
                 continue
+            while True:
+                print("\n--MENÚ--")
+                print("1.Consultar cuenta")
+                print("2.Retirar")
+                print("3.Cambiar PIN")
+                print("4.Historial de Transacciones")
+                print("5.Salir\n")
+                option2 = input("Seleccione una opción (1-5):")
 
-            print("\n--MENÚ--")
-            print("1.Consultar cuenta")
-            print("2.Retirar")
-            print("3.Cambiar PIN")
-            print("4.Historial de Transacciones")
-            print("5.Salir\n")
-            option2 = input("Seleccione una opción (1-5):")
-
-            match option2:
-                case "1":
-                    registro.consultar_cuenta(cuenta)
-                case "2":
-                    registro.retirar(cuenta)
-                case "3":
-                    cuenta.cambiar_pin()
-                case "4":
-                    cuenta.mostrar_historial()
-                case "5":
-                    print("Gracias por usar el programa.")
-                    break
-                case _:
-                    print("Ocurrió un error inesperado\n")
+                match option2:
+                    case "1":
+                        registro.consultar_cuenta(cuenta)
+                    case "2":
+                        registro.retirar(cuenta)
+                    case "3":
+                        cuenta.cambiar_pin()
+                    case "4":
+                        cuenta.mostrar_historial()
+                    case "5":
+                        print("Gracias por usar el programa.")
+                        break
+                    case _:
+                        print("Ocurrió un error inesperado\n")
         case "2":
             registro.crear_cuenta()
         case "3":
